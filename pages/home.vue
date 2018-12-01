@@ -20,7 +20,7 @@
 						<h3>Bienvenue {{ loadedUser.email }}!</h3><br />
 						<h4>Une demonstration des techniques de Progressive Web App (PWA) appliquées à TIF:</h4><br />
 						- Installer l'application sur son écran d'accueil<br />
-						- Recevoir une notification de résultat dès le coup sifflet final sur mes différent appareils enregistrés (ordinateur, tablette, téléphone)
+						- Recevoir une notification de résultat dès le coup sifflet final sur mes différents appareils enregistrés (ordinateur, tablette, téléphone). Il faut bien entendu souscrire aux notifications manuellement sur chaque appareil où l'on souhaite recevoir des notifications.
 						<br /><br />
 
 						<v-alert :value="true" type="error" dismissible v-if="are_notifications_allowed === 'no'">
