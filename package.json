@@ -11,7 +11,9 @@
         "generate": "nuxt generate",
         "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
         "precommit": "npm run lint",
-        "web-push": "web-push"
+        "web-push": "web-push",
+        "heroku-postbuild": "npm run build",
+        "hdeploy": "git push heroku ssr:master"
     },
     "dependencies": {
         "@fortawesome/free-solid-svg-icons": "^5.5.0",
