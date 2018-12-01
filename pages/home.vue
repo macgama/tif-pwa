@@ -24,7 +24,7 @@
 						<br /><br />
 
 						<v-alert :value="true" type="error" dismissible v-if="are_notifications_allowed === 'no'">
-      						You have not allowed notifications to be displayed from this site. To receive our notifications, change your browser settings (usually found on the left of the address bar)
+      						You did not allowed notifications on this site. To receive our notifications, change your browser settings (notifications button usually stamds directly on the left of the address bar)
     					</v-alert>
 
 						<v-btn color="success" @click="enableNotifications" v-if="are_notifications_allowed === 'default'">Enable notifications on this site</v-btn>
