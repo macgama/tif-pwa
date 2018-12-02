@@ -13,7 +13,6 @@ if (config.dev) {
     token_uri: "https://oauth2.googleapis.com/token",
     auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
     client_x509_cert_url: "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-2w96f%40tif-pwa.iam.gserviceaccount.com"
-    // football_api_key: process.env.FOOTBALL_API_KEY
   };
 } else {
   module.exports = {
