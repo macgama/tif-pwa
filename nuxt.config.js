@@ -66,6 +66,10 @@ module.exports = {
         "~/serverMiddleware/validateFirebaseIdToken",
         { path: "/admin", handler: "~/serverMiddleware/authAdmin" },
         {
+            path: "/register-new-user",
+            handler: "~/serverMiddleware/registerNewUser"
+        },
+        {
             path: "/create-subscription",
             handler: "~/serverMiddleware/createSubscription"
         },

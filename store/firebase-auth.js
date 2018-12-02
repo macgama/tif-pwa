@@ -126,7 +126,7 @@ export const actions = {
                         // commit('setLoading', false, { root: true })
                         new Noty({
                             type: "success",
-                            text: "messages.registration.success",
+                            text: "Successful registration",
                             timeout: 10000,
                             theme: "metroui"
                         }).show()
