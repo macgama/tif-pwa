@@ -4,7 +4,7 @@
             <v-layout row wrap>
                 <v-flex d-flex xs2 justify-center align-center class="text-xs-left">
                     <v-card flat tile class="deep-orange boxTif" style="max-height: 100px">
-                        <img src="soccer.png" width="100px" height="100px" class="imageLogoTif"/>
+                        <img src="/images/soccer.png" width="100px" height="100px" class="imageLogoTif"/>
                     </v-card>
                 </v-flex>
                 <v-flex d-flex xs8>
@@ -15,25 +15,25 @@
                                     <v-layout row wrap>
                                         <v-flex d-flex xs3 justify-center align-center class="text-xs-center elevation-0 headerMenu" @mouseover="mouseOver('left')" @mouseleave="mouseLeave">
                                             <div class="">
-                                                <img src="level.png" width="40px" height="40px" class="imageLogo" /><br />
+                                                <img src="/images/level.png" width="40px" height="40px" class="imageLogo" /><br />
                                                 5 / 100
                                             </div>
                                         </v-flex>
                                         <v-flex d-flex xs3 justify-center align-center class="text-xs-center elevation-0 headerMenu">
                                             <div class="">
-                                                <img src="energie.png" width="40px" height="40px" class="imageLogo"/><br />
+                                                <img src="/images/energie.png" width="40px" height="40px" class="imageLogo"/><br />
                                                 10 / 10
                                             </div>
                                         </v-flex>
                                         <v-flex d-flex xs3 justify-center align-center class="text-xs-center elevation-0 headerMenu" >
                                             <div class="">
-                                                <img src="dollar.png" width="40px" height="40px" class="imageLogo"/><br />
+                                                <img src="/images/dollar.png" width="40px" height="40px" class="imageLogo"/><br />
                                                 1654 $
                                             </div>
                                         </v-flex>
                                         <v-flex d-flex xs3 justify-center align-center class="text-xs-center elevation-0 headerMenu" @mouseover="mouseOver('right')" @mouseleave="mouseLeave">
                                             <div class="">
-                                                <img src="token.png" width="40px" height="40px" class="imageLogo"/><br />
+                                                <img src="/images/token.png" width="40px" height="40px" class="imageLogo"/><br />
                                                 16
                                             </div>
                                         </v-flex>
@@ -59,7 +59,7 @@
                 </v-flex>
                 <v-flex d-flex xs2 justify-center align-center class="text-xs-right">
                     <v-card flat tile class="deep-orange boxTif" style="max-height: 100px">
-                        <img src="switzerland.png" width="100px" height="100px" class="imageLogoTif"/>
+                        <img src="/images/switzerland.png" width="100px" height="100px" class="imageLogoTif"/>
                     </v-card>
                 </v-flex>
             </v-layout>
@@ -74,7 +74,7 @@
         <v-container fluid style="padding: 0; max-width: 800px; background-color: grey; color: white">
             <v-layout>
                 <v-flex d-flex x1 justify-start align-center style="height: 40px; padding-left: 20px">
-                    <<
+                    previous
                 </v-flex>
                 <v-flex d-flex x2 justify-start align-center class="text-xs-center" style="height: 40px">
                     Hier
@@ -86,7 +86,7 @@
                     Demain
                 </v-flex>
                 <v-flex d-flex x1 justify-end align-center style="height: 40px; padding-right: 20px">
-                    >>
+                    next
                 </v-flex>
             </v-layout>             
         </v-container>
@@ -106,7 +106,7 @@
                                     <template slot="items" slot-scope="props" style="height: 15px; border-spacing: 0; padding: 2px; border: 1px solid black">
                                         <v-layout align-center style="margin-top: 8px; padding-top: 0">
                                             <v-flex xs12>
-                                                <div style="background-color: black; color: white; padding: 5px"><img src="switzerland.png" style="width: 13px; height: 13px"/> {{ props.item.competition.name }}</div>
+                                                <div style="background-color: black; color: white; padding: 5px"><img src="/images/switzerland.png" style="width: 13px; height: 13px"/> {{ props.item.competition.name }}</div>
                                             </v-flex>
                                         </v-layout>
                                         <v-layout align-center style="padding: 0; border-right: 1px solid black; border-left: 1px solid black; border-bottom: 1px solid black">
@@ -123,6 +123,7 @@
                                                     <v-flex class="text-xs-left" style="width: 4px; padding-left: 2px; padding-right: 2px; height: 40px; margin: 0">
                                                         <div style="background-color: red; height: 40px; width: 2px"></div>
                                                     </v-flex>
+                                                    <v-flex>
                                                         <v-layout align-center style="width: 100%">
                                                             <v-flex sm1 hidden-xs-only align-center class="text-xs-left" style="width: 50px; padding-left: 15px">
                                                                 <img :src="props.item.home_team.image" width="25"/>
@@ -150,123 +151,8 @@
                         </v-card>
                     </v-expansion-panel-content>
                 </v-expansion-panel>
-
-                <!-- ENGLISH PREMIER LEAGUE -->
-                <v-expansion-panel class="elevation-0" :value="1">
-                    <v-expansion-panel-content style="background-color: green">
-                        <div slot="header" class="white--text">
-                            ENGLISH PREMIER LEAGUE
-                        </div>
-                        <v-icon slot="actions" color="white">$vuetify.icons.expand</v-icon>
-                        <v-card>
-                            <v-card-text style="padding: 8px">
-                                <v-data-table :items="eventsByCompetition('english_premier_league_2018_2019')" class="elevation-0" hide-actions hide-headers>
-                                    <template slot="items" slot-scope="props" style="height: 15px; border-spacing: 0; padding: 2px; border: 1px solid black">
-                                        <v-layout align-center style="">
-                                            <v-flex xs12>
-                                                <div style="background-color: black; color: white; padding: 5px"><img src="switzerland.png" style="width: 13px; height: 13px"/> {{ props.item.competition.name }}</div>
-                                            </v-flex>
-                                        </v-layout>
-                                        <v-layout align-center style="padding: 0; border: 1px solid black">
-                                            <v-flex xs12 style="margin: 0; padding-top: 2px; padding-bottom: 2px; height: 100%">
-                                                <v-layout align-start>
-                                                    <v-flex class="text-xs-left" style="width: 4px; padding-left: 2px; padding-right: 2px; height: 15px; margin: 0">
-                                                        <div style="background-color: red; height: 100%; width: 2px"></div>
-                                                    </v-flex>
-                                                    <v-flex class="text-xs-left" style="width: 100%; padding: 0; height: 15px; margin: 0">
-                                                        <div style="color: orange;font-size: 80%"><span style="float: left; background-color: red; color: white; text-align: center; padding-left: 5px; padding-right: 5px; margin-right: 5px"> {{ props.item.status}}</span> {{ props.item.date }} - {{ props.item.time}}</div>
-                                                    </v-flex>
-                                                </v-layout>
-                                                <v-layout row align-center>
-                                                    <v-flex class="text-xs-left" style="width: 4px; padding-left: 2px; padding-right: 2px; height: 40px; margin: 0">
-                                                        <div style="background-color: red; height: 40px; width: 2px"></div>
-                                                    </v-flex>
-                                                        <v-layout align-center style="width: 100%">
-                                                            <v-flex sm1 hidden-xs-only align-center class="text-xs-left" style="width: 50px; padding-left: 15px">
-                                                                <img :src="props.item.home_team.image" width="25"/>
-                                                            </v-flex>
-                                                            <v-flex sm4 xs5 align-center class="text-xs-left pd-left10">
-                                                                {{ props.item.home_team.name }} 
-                                                            </v-flex>
-                                                            <v-flex sm2 xs2 class="text-xs-center">
-                                                                <span style="background-color: black; color: orange; padding: 2px 10px; border-radius: 5px; font-size: 130%"><b>{{ props.item.score }}</b></span>
-                                                            </v-flex>
-                                                            <v-flex sm4 xs5 align-center class="text-xs-right pd-right10">
-                                                                {{ props.item.visitor_team.name }}
-                                                            </v-flex>
-                                                            <v-flex sm1 hidden-xs-only align-center class="text-xs-right" style="width: 50px; padding-right: 15px">
-                                                                <img :src="props.item.visitor_team.image" width="25"/>
-                                                            </v-flex>
-                                                        </v-layout>
-                                                    </v-flex>
-                                                </v-layout>
-                                            </v-flex>
-                                        </v-layout>                                 
-                                    </template>
-                                </v-data-table>
-                            </v-card-text>
-                        </v-card>
-                    </v-expansion-panel-content>
-                </v-expansion-panel>
-
-                <!-- ITALIAN SERIE A -->
-                <v-expansion-panel class="elevation-0" :value="1">
-                    <v-expansion-panel-content class="orange">
-                        <div slot="header" class="white--text">
-                            ITALIAN SERIE A
-                        </div>
-                        <v-icon slot="actions" color="white">$vuetify.icons.expand</v-icon>
-                        <v-card>
-                            <v-card-text style="padding: 8px">
-                                <v-data-table :items="eventsByCompetition('italian_serie_a_2018_2019')" class="elevation-0" hide-actions hide-headers>
-                                    <template slot="items" slot-scope="props" style="height: 15px; border-spacing: 0; padding: 2px; border: 1px solid black">
-                                        <v-layout align-center style="">
-                                            <v-flex xs12>
-                                                <div style="background-color: black; color: white; padding: 5px"><img src="switzerland.png" style="width: 13px; height: 13px"/> {{ props.item.competition.name }}</div>
-                                            </v-flex>
-                                        </v-layout>
-                                        <v-layout align-center style="padding: 0; border: 1px solid black">
-                                            <v-flex xs12 style="margin: 0; padding-top: 2px; padding-bottom: 2px; height: 100%">
-                                                <v-layout align-start>
-                                                    <v-flex class="text-xs-left" style="width: 4px; padding-left: 2px; padding-right: 2px; height: 15px; margin: 0">
-                                                        <div style="background-color: red; height: 100%; width: 2px"></div>
-                                                    </v-flex>
-                                                    <v-flex class="text-xs-left" style="width: 100%; padding: 0; height: 15px; margin: 0">
-                                                        <div style="color: orange;font-size: 80%"><span style="float: left; background-color: red; color: white; text-align: center; padding-left: 5px; padding-right: 5px; margin-right: 5px"> {{ props.item.status}}</span> {{ props.item.date }} - {{ props.item.time}}</div>
-                                                    </v-flex>
-                                                </v-layout>
-                                                <v-layout row align-center>
-                                                    <v-flex class="text-xs-left" style="width: 4px; padding-left: 2px; padding-right: 2px; height: 40px; margin: 0">
-                                                        <div style="background-color: red; height: 40px; width: 2px"></div>
-                                                    </v-flex>
-                                                        <v-layout align-center style="width: 100%">
-                                                            <v-flex sm1 hidden-xs-only align-center class="text-xs-left" style="width: 50px; padding-left: 15px">
-                                                                <img :src="props.item.home_team.image" width="25"/>
-                                                            </v-flex>
-                                                            <v-flex sm4 xs5 align-center class="text-xs-left pd-left10">
-                                                                {{ props.item.home_team.name }} 
-                                                            </v-flex>
-                                                            <v-flex sm2 xs2 class="text-xs-center">
-                                                                <span style="background-color: black; color: orange; padding: 2px 10px; border-radius: 5px; font-size: 130%"><b>{{ props.item.score }}</b></span>
-                                                            </v-flex>
-                                                            <v-flex sm4 xs5 align-center class="text-xs-right pd-right10">
-                                                                {{ props.item.visitor_team.name }}
-                                                            </v-flex>
-                                                            <v-flex sm1 hidden-xs-only align-center class="text-xs-right" style="width: 50px; padding-right: 15px">
-                                                                <img :src="props.item.visitor_team.image" width="25"/>
-                                                            </v-flex>
-                                                        </v-layout>
-                                                    </v-flex>
-                                                </v-layout>
-                                            </v-flex>
-                                        </v-layout>                                 
-                                    </template>
-                                </v-data-table>
-                            </v-card-text>
-                        </v-card>
-                    </v-expansion-panel-content>
-                </v-expansion-panel>
             </v-card-text>
+
         </v-container>          
         <v-footer style="background-color: white; position: fixed; bottom: 0; width: 100%" height="auto" class="text-xs-center">
             <v-container fluid style="padding: 0; max-width: 800px">
@@ -274,23 +160,23 @@
                     <div id="dock">
                         <ul>
                             <li>
-                                <a href="equipes.html"><img src="menuShop.png">
+                                <a href="equipes.html"><img src="/images/menuShop.png">
                                 <span class="textMenu">Equipes</span></a>
                             </li>
                             <li>
-                                <a href="competitions.html"><img src="menuResultat.png">
+                                <a href="competitions.html"><img src="/images/menuResultat.png">
                                 <span class="textMenu">Compétition</span></a>
                             </li>
                             <li id="active">
-                                <a href="scoremode.html"><img src="menuHome.png">
-                                <span class="textMenu">Matches</span></a>
+                                <nuxt-link to="/"><img src="/images/menuHome.png">
+                                <span class="textMenu">Matches</span></nuxt-link>
                             </li>
                             <li>
-                                <a href="joueurs.html"><img src="menuSocial.png">
+                                <a href="joueurs.html"><img src="/images/menuSocial.png">
                                 <span class="textMenu">Joueurs</span></a>
                             </li>
                             <li>
-                                <a href="tifnews.html"><img src="menuResultat.png">
+                                <a href="tifnews.html"><img src="/images/menuResultat.png">
                                 <span class="textMenu">TIF News</span></a>
                             </li>
                         </ul>
@@ -473,176 +359,53 @@
 <style scoped>
     /* ScoreCard */
 
-    .card {
-        border-radius: 5px;
-    }
-    .card-title {
-        background-color: lightslategray;
-    }
-    .card-text {
-        background-color: whitesmoke;
-        width: auto;
-        border-radius: 8px;
-    }
-    .card-footer {
-        background-color: lightslategrey;
-    }
-    .fas:hover {
-        cursor: pointer;
-        color: #fff;
-    }
-    
-    .v-expansion-panel__header {
-        padding: 2px 12px;
-        min-height: 0;
-    }
-    
-    #app {
-        font: normal 100%/1 "Acme", Helvetica, sans-serif;
-    }
-
-    /* Header */
-    .headerMenu:hover {
-        cursor: pointer;
-        background-color: orange;
-    }
-    .headerInfo {
-        background-color: orange; border-radius: 15px; padding: 0px 15px;
-    }
-    .activeLeft {
-        background-color: orange; border-radius: 0px 15px 15px 15px; padding: 0px 15px;
-    }
-    .activeRight {
-        background-color: orange; border-radius: 15px 0px 15px 15px; padding: 0px 15px;
-    }
-
-    /* Menu */
-
-    #dock-container {
-        height: 80px;
-        padding: 0;
-        margin: 0;
-        bottom: 0;
-        background-color: #FF5722;
-        border: none;
-        border-top: 4px solid darkred;
-    }
-
-    #dock-container li#active img {
-        -webkit-transform: scale(1.65);
-        margin: 0 0.5em;
-    }
-
-    #dock-container li {
-        width: 17%;
-        padding: 0;
-        margin: 0;
-        list-style-type: none;
-        display: inline-block;
-        position: relative;
-        padding-top: 10px;
-    }
-
-    #dock-container ul {
-        width: 100%;
-        padding-left: 0px;
-        padding-right: 0px;
-        margin-bottom: 0;
-    }
-
-    #dock-container li img {
-        width: 58px;
-        height: 58px;
-        -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.7, transparent), to(rgba(255,255,255,.5)));
-        -webkit-transition: all 0.3s;
-        -webkit-transform-origin: 50% 100%;
-    }
-
-    #dock-container li:hover img { 
-        -webkit-transform: scale(1.65);
-        margin: 0 0.5em;
-    }
-
-    #dock-container li:hover + li img, #dock-container li.prev img {
-        -webkit-transform: scale(1);
-        margin: 0 0;
-    }
-
-    #dock-container li span {
-        display: none;
-        position: absolute;
-        bottom: 0px;
-        left: 0;
-        width: 100%;
-        background-color: rgba(0,0,0,0.5);
-        border-radius: 5px;
-    }
-
-    #dock-container li#active span {
-        display: none;
-        position: absolute;
-        bottom: 0px;
-        left: 0;
-        width: 100%;
-        background-color: rgba(0,0,0,0.5);
-        border-radius: 5px;
-    }
-
-    #dock-container li#active span {
-        display: block;
-        color: #fff;
-    }
-
-    #dock-container li#active .textMenu {
-        font: normal 120%/1 "Acme", Helvetica, sans-serif;
-        padding: 2px;
-    }
-
-    #dock-container li:hover span {
-        display: block;
-        color: #fff;
-    }
-
-    #dock-container .textMenu {
-        font: normal 120%/1 "Acme", Helvetica, sans-serif;
-        padding: 2px;
-    }
-
-        @media only screen and (max-width: 768px) {
-
+        .card {
+            border-radius: 5px;
+        }
+        .card-title {
+            background-color: lightslategray;
+        }
+        .card-text {
+            background-color: whitesmoke;
+            width: auto;
+            border-radius: 8px;
+        }
+        .card-footer {
+            background-color: lightslategrey;
+        }
+        .fas:hover {
+            cursor: pointer;
+            color: #fff;
+        }
+        
+        .v-expansion-panel__header {
+            padding: 2px 12px;
+            min-height: 0;
+        }
+        
         #app {
-            font: normal 90%/1 "Acme", Helvetica, sans-serif;
-        }
-        
-        .pd-right10 {
-            padding-right: 10px;
-        }
-        
-        .pd-left10 {
-            padding-left: 10px;
+            font: normal 100%/1 "Acme", Helvetica, sans-serif;
         }
 
         /* Header */
-
-        .imageLogoTif {
-            width: 60px;
-            height: 60px;
+        .headerMenu:hover {
+            cursor: pointer;
+            background-color: orange;
         }
-
-        .boxTif {
-            width: 70px;
-            height: 70px;
+        .headerInfo {
+            background-color: orange; border-radius: 15px; padding: 0px 15px;
         }
-
-        .imageLogo {
-            width: 30px;
-            height: 30px;
+        .activeLeft {
+            background-color: orange; border-radius: 0px 15px 15px 15px; padding: 0px 15px;
+        }
+        .activeRight {
+            background-color: orange; border-radius: 15px 0px 15px 15px; padding: 0px 15px;
         }
 
         /* Menu */
 
         #dock-container {
-            height: 55px;
+            height: 80px;
             padding: 0;
             margin: 0;
             bottom: 0;
@@ -663,7 +426,7 @@
             list-style-type: none;
             display: inline-block;
             position: relative;
-            padding-top: 3px;
+            padding-top: 10px;
         }
 
         #dock-container ul {
@@ -674,11 +437,8 @@
         }
 
         #dock-container li img {
-            width: 38px;
-            height: 38px;
-            -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.7, transparent), to(rgba(255,255,255,.5)));
-            -webkit-transition: all 0.3s;
-            -webkit-transform-origin: 50% 100%;
+            width: 58px;
+            height: 58px;
         }
 
         #dock-container li:hover img { 
@@ -717,7 +477,7 @@
         }
 
         #dock-container li#active .textMenu {
-            font: normal 90%/1 "Acme", Helvetica, sans-serif;
+            font: normal 120%/1 "Acme", Helvetica, sans-serif;
             padding: 2px;
         }
 
@@ -727,8 +487,128 @@
         }
 
         #dock-container .textMenu {
-            font: normal 90%/1 "Acme", Helvetica, sans-serif;
+            font: normal 120%/1 "Acme", Helvetica, sans-serif;
             padding: 2px;
         }
-    }
+
+            @media only screen and (max-width: 768px) {
+
+            #app {
+                font: normal 90%/1 "Acme", Helvetica, sans-serif;
+            }
+            
+            .pd-right10 {
+                padding-right: 10px;
+            }
+            
+            .pd-left10 {
+                padding-left: 10px;
+            }
+
+            /* Header */
+
+            .imageLogoTif {
+                width: 60px;
+                height: 60px;
+            }
+
+            .boxTif {
+                width: 70px;
+                height: 70px;
+            }
+
+            .imageLogo {
+                width: 30px;
+                height: 30px;
+            }
+
+            /* Menu */
+
+            #dock-container {
+                height: 55px;
+                padding: 0;
+                margin: 0;
+                bottom: 0;
+                background-color: #FF5722;
+                border: none;
+                border-top: 4px solid darkred;
+            }
+
+            #dock-container li#active img {
+                -webkit-transform: scale(1.65);
+                margin: 0 0.5em;
+            }
+
+            #dock-container li {
+                width: 17%;
+                padding: 0;
+                margin: 0;
+                list-style-type: none;
+                display: inline-block;
+                position: relative;
+                padding-top: 3px;
+            }
+
+            #dock-container ul {
+                width: 100%;
+                padding-left: 0px;
+                padding-right: 0px;
+                margin-bottom: 0;
+            }
+
+            #dock-container li img {
+                width: 38px;
+                height: 38px;
+            }
+
+            #dock-container li:hover img { 
+                -webkit-transform: scale(1.65);
+                margin: 0 0.5em;
+            }
+
+            #dock-container li:hover + li img, #dock-container li.prev img {
+                -webkit-transform: scale(1);
+                margin: 0 0;
+            }
+
+            #dock-container li span {
+                display: none;
+                position: absolute;
+                bottom: 0px;
+                left: 0;
+                width: 100%;
+                background-color: rgba(0,0,0,0.5);
+                border-radius: 5px;
+            }
+
+            #dock-container li#active span {
+                display: none;
+                position: absolute;
+                bottom: 0px;
+                left: 0;
+                width: 100%;
+                background-color: rgba(0,0,0,0.5);
+                border-radius: 5px;
+            }
+
+            #dock-container li#active span {
+                display: block;
+                color: #fff;
+            }
+
+            #dock-container li#active .textMenu {
+                font: normal 90%/1 "Acme", Helvetica, sans-serif;
+                padding: 2px;
+            }
+
+            #dock-container li:hover span {
+                display: block;
+                color: #fff;
+            }
+
+            #dock-container .textMenu {
+                font: normal 90%/1 "Acme", Helvetica, sans-serif;
+                padding: 2px;
+            }
+        }
 </style>
