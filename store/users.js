@@ -1,9 +1,5 @@
-import {
-  Auth,
-  GoogleAuthProvider,
-  FacebookAuthProvider
-} from "~/plugins/firebase-client-init.js";
-import firebase from "firebase";
+import * as firebase from "firebase/app";
+import "firebase/database";
 import axios from "axios";
 import Noty from "noty";
 import moment from "moment";

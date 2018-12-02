@@ -111,18 +111,7 @@
                                         </v-layout>
                                         <v-layout align-center style="padding: 0; border-right: 1px solid black; border-left: 1px solid black; border-bottom: 1px solid black">
                                             <v-flex xs12 style="margin: 0; padding-top: 2px; padding-bottom: 2px; height: 100%">
-                                                <v-layout align-start>
-                                                    <v-flex class="text-xs-left" style="width: 4px; padding-left: 2px; padding-right: 2px; height: 15px; margin: 0">
-                                                        <div style="background-color: red; height: 100%; width: 2px"></div>
-                                                    </v-flex>
-                                                    <v-flex class="text-xs-left" style="width: 100%; padding: 0; height: 15px; margin: 0">
-                                                        <div style="color: orange;font-size: 80%"><span style="float: left; background-color: red; color: white; text-align: center; padding-left: 5px; padding-right: 5px; margin-right: 5px"> {{ props.item.status}}</span> {{ props.item.date }} - {{ props.item.time}}</div>
-                                                    </v-flex>
-                                                </v-layout>
                                                 <v-layout row align-center>
-                                                    <v-flex class="text-xs-left" style="width: 4px; padding-left: 2px; padding-right: 2px; height: 40px; margin: 0">
-                                                        <div style="background-color: red; height: 40px; width: 2px"></div>
-                                                    </v-flex>
                                                     <v-flex>
                                                         <v-layout align-center style="width: 100%">
                                                             <v-flex sm1 hidden-xs-only align-center class="text-xs-left" style="width: 50px; padding-left: 15px">
@@ -165,7 +154,7 @@
                                     <template slot="items" slot-scope="props" style="height: 15px; border-spacing: 0; padding: 2px; border: 1px solid black">
                                         <v-layout align-center style="">
                                             <v-flex xs12>
-                                                <div style="background-color: black; color: white; padding: 5px"><img src="switzerland.png" style="width: 13px; height: 13px"/> {{ props.item.competition.name }}</div>
+                                                <div style="background-color: black; color: white; padding: 5px"><img src="/images/switzerland.png" style="width: 13px; height: 13px"/> {{ props.item.competition.name }}</div>
                                             </v-flex>
                                         </v-layout>
                                         <v-layout align-center style="padding: 0; border: 1px solid black">
