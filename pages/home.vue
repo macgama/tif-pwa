@@ -4,7 +4,7 @@
 			<v-card class="card">
 				<v-card-title primary-title>
 					<v-flex xs6>
-						<h2 class="white--text text-xs-left">HOMEPAGE 2</h2>
+						<h2 class="white--text text-xs-left">HOMEPAGE</h2>
 					</v-flex>
 					<v-flex xs6 class="text-xs-right">
 						<fa :icon="['fas', 'arrow-circle-left']" size="2x" class="icon" @click="goBack" />
