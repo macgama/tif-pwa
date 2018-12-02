@@ -2,7 +2,8 @@ import * as firebase from "firebase/app";
 import "firebase/auth";
 
 var config = {
-  	apiKey: process.env.API_KEY,
+  	// apiKey: process.env.API_KEY,
+  	apiKey: "AIzaSyAM6LAjoitrT8oBtMvK9JR7dIUDlcMJR7g",
   	authDomain: process.env.AUTH_DOMAIN,
   	databaseURL: process.env.DATABASE_URL,
   	projectId: process.env.PROJECT_ID,
