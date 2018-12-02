@@ -68,7 +68,6 @@
 	.loading-page {
 	  	width: 0px;
 		height: 0px;
-		/*background-color: #000;*/
 		position: absolute;
 		top:0;
 		bottom: 0;

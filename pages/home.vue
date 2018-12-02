@@ -1,8 +1,4 @@
 <template>
-	<!--<div>
-		<nuxt-link to="/about">About</nuxt-link><br />
-		<nuxt-link to="/admin">Admin</nuxt-link>
-	</div> -->
 	<v-layout align-center justify-center row fill-height>
 		<v-flex xs12 sm10 md8 lg6>
 			<v-card class="card">
