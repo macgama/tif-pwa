@@ -151,7 +151,7 @@ export const actions = {
         } catch (error) {
             new Noty({
                 type: "error",
-                text: "messages.login.error: " + error,
+                text: "Sorry, an error occured during your registration process.",
                 timeout: 5000,
                 theme: "metroui"
             }).show()
