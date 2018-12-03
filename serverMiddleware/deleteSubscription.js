@@ -42,7 +42,7 @@ module.exports = app.use(async function(req, res, next) {
       });
     });
     console.log("updates: ", updates);
-    return admin
+    admin
       .database()
       .ref()
       .update(updates)
@@ -52,7 +52,7 @@ module.exports = app.use(async function(req, res, next) {
       .catch(error => {
         console.log("Firebase error", error);
       });
-    res.send("GET request succeeded!");
+    res.send("DELETE subscription succeeded!");
   } catch (error) {
     console.log(error);
     res.send("GET request failed...");

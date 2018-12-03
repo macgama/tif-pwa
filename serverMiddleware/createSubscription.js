@@ -16,7 +16,8 @@ module.exports = app.use(function(req, res, next) {
     const newSub = req.body.newSub;
     // console.log("teams: ", teams);
     // console.log("newSub: ", newSub);
-    const userId = "WRus1acAvkdGPmnxqLOukl9mKM23";
+    // const userId = "WRus1acAvkdGPmnxqLOukl9mKM23";
+    const userId = req.body.userId;
     let updates = {};
 
     const dataObject = {

@@ -20,6 +20,7 @@
 							- Recevoir une notification de résultat dès le coup sifflet final sur mes différents appareils enregistrés (ordinateur, tablette, téléphone). Il faut bien entendu souscrire aux notifications manuellement sur chaque appareil depuis lequel on souhaite recevoir des notifications.
 						</p>
 						<br /><br />
+						<nuxt-link to="/api/send-notifications" target="_blank">Send notifications</nuxt-link><br />
 
 						<v-alert :value="true" type="error" dismissible v-if="are_notifications_allowed === 'no'">
       						You did not allowed notifications on this site. To receive our notifications, change your browser settings (notifications button usually stamds directly on the left of the address bar)
@@ -56,6 +57,7 @@
 <script>
 	import axios from 'axios'
 	import Noty from 'noty'
+	import firebase from 'firebase/app'
 
 	// PWA Install to Homescreen
 	let deferredPrompt
@@ -143,8 +145,23 @@
 			},
 			async checkSubscription(displayMessage = true) {
 				console.log("Call to checkSubscription method")
-
+				new Noty({
+					type: "success",
+					text: "Call to checkSubscription",
+					timeout: 5000,
+					theme: "metroui"
+				}).show();
 				const that = this
+
+				if (!navigator.serviceWorker) {
+					new Noty({
+						type: "warning",
+						text: "Service worker is not available on this navigator &#x2639;",
+						timeout: 5000,
+						theme: "metroui"
+					}).show();
+					return
+				}
 				navigator.serviceWorker.ready.then(function(reg) {
 					reg.pushManager
 						.getSubscription()
@@ -231,11 +248,11 @@
 				if (!loadedUserTeams.length > 0) {
 					console.log('abc')
 					loadedUserTeams = await this.$store.dispatch('users/loadedUserTeams')
+					loadedUserTeams.forEach((team) => {
+						userTeams.push(team.slug)
+					})
 				}
-				loadedUserTeams.forEach((team) => {
-					userTeams.push(team.slug)
-				})
-
+				
 				console.log('userTeams: ', userTeams)
 				const that = this
 				var reg
@@ -280,7 +297,8 @@
 								// 	"inter_milan",
 								// 	"juventus"
 								// ]
-								teams: userTeams
+								teams: userTeams,
+								userId: firebase.auth().currentUser.uid
 							})
 							.then(function(response) {
 								console.log('response: ', response)

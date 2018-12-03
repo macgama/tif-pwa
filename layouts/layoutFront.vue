@@ -1,5 +1,5 @@
 <template>
-	<v-app>
+	<v-app id="app">
 		<v-content class="loading-page" v-if="loadingPage">
 			<div class="loader"></div>
 		</v-content>
@@ -21,10 +21,10 @@
 				// hid is used as unique identifier. Do not use `vmid` for it as it will not work
 				{ hid: 'description', name: 'description', content: 'An application for real fans - Get live results - Play the game - Support your team - Interact with other supporters - Become the ultimate fan' },
 				{ name: "robots", content: "noindex" },
-				{ }
 			],
 			link: [
-				{ rel: 'manifest', href: '/manifest.json' }
+				{ rel: 'manifest', href: '/manifest.json' },
+				// { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Acme' }
 			]
 		},
 		middleware: ['auth-check'],
@@ -65,6 +65,9 @@
 </script>
 
 <style>
+	/* #app {
+		font: normal 100%/1 "Acme", Helvetica, sans-serif;
+	} */
 	.loading-page {
 	  	width: 0px;
 		height: 0px;

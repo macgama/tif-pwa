@@ -95,7 +95,7 @@ module.exports = app.use(async function(req, res, next) {
           .sendNotification(
             pushConfig,
             JSON.stringify({
-              title: `${team.home_team.name} vs ${team.visitor_team.name}: ${team.score}`,
+              title: `${team.home_team.name.substring(0, 3).toUpperCase()} vs ${team.visitor_team.name.substring(0, 3).toUpperCase()}: ${team.score}`,
               content: "Congratulations, you've earned 20$fans!",
               icon: "/static/images/icons/icon_256x256.png",
               badge: "/static/images/icons/icon_96x96.png",

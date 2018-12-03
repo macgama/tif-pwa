@@ -1,5 +1,5 @@
 <template>
-    <v-content>
+    <v-content id="app">
         <v-container fluid style="padding: 0; max-width: 800px; background-color: #FF5722; color: white; border-bottom: 4px solid darkred">
             <v-layout row wrap>
                 <v-flex d-flex xs2 justify-center align-center class="text-xs-left">
@@ -256,6 +256,9 @@
     export default {
         head: {
             title: 'Events',
+            link: [
+				{ rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Acme' }
+			]
         },
         layout: 'layoutFront',
         async created() {
@@ -344,8 +347,11 @@
 </script>
 
 <style scoped>
+    #app {
+        font: normal 100%/1 "Acme", Helvetica, sans-serif;
+    }
     /* ScoreCard */
-
+    
     .card {
         border-radius: 5px;
     }
