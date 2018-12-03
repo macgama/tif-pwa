@@ -92,107 +92,63 @@
         </v-container>
         <v-container fluid style="padding: 0; max-width: 800px; background-color: whitesmoke; margin-bottom: 85px">
             <v-card-text class="card-text" style="padding: 8px">
-
-                <!-- SWISS SUPER LEAGUE -->
+                <p>
+                    <!-- userEvents: {{ userEvents }}<br /><br /> -->
+                    <!-- allEvents: {{ allEvents }}<br /><br /> -->
+                </p>
+                <!-- MY EVENTS -->
                 <v-expansion-panel class="elevation-0" :value="0">
                     <v-expansion-panel-content class="orange">
                         <div slot="header" class="white--text">
-                            SWISS SUPERLEAGUE
+                            MY EVENTS
                         </div>
                         <v-icon slot="actions" color="white">$vuetify.icons.expand</v-icon>
                         <v-card>
                             <v-card-text style="padding: 0 8px 8px 8px">
-                                <v-data-table :items="eventsByCompetition('swiss_super_league_2018_2019')" class="elevation-0" hide-actions hide-headers>
+                                <v-data-table :items="userEvents" class="elevation-0" hide-actions hide-headers>
                                     <template slot="items" slot-scope="props" style="height: 15px; border-spacing: 0; padding: 2px; border: 1px solid black">
-                                        <v-layout align-center style="margin-top: 8px; padding-top: 0">
-                                            <v-flex xs12>
-                                                <div style="background-color: black; color: white; padding: 5px"><img src="/images/switzerland.png" style="width: 13px; height: 13px"/> {{ props.item.competition.name }}</div>
-                                            </v-flex>
+                                        <v-layout style="background-color: black;">
+                                            <div style="color: white; padding: 5px; display: flex; align-items:center;" v-for="country in props.item.competition.countries" :key="country.slug">
+                                                <img :src="'/images/countries/' + country.slug + '.png'" style="width: 20px; height: 20px; margin-right: 5px;" />
+                                                {{ props.item.competition.name }}
+                                            </div>
                                         </v-layout>
                                         <v-layout align-center style="padding: 0; border-right: 1px solid black; border-left: 1px solid black; border-bottom: 1px solid black">
-                                            <v-flex xs12 style="margin: 0; padding-top: 2px; padding-bottom: 2px; height: 100%">
-                                                <v-layout row align-center>
-                                                    <v-flex>
-                                                        <v-layout align-center style="width: 100%">
-                                                            <v-flex sm1 hidden-xs-only align-center class="text-xs-left" style="width: 50px; padding-left: 15px">
-                                                                <img :src="props.item.home_team.image" width="25"/>
-                                                            </v-flex>
-                                                            <v-flex sm4 xs5 align-center class="text-xs-left pd-left10">
-                                                                {{ props.item.home_team.name }} 
-                                                            </v-flex>
-                                                            <v-flex sm2 xs2 class="text-xs-center">
-                                                                <span style="background-color: black; color: orange; padding: 2px 10px; border-radius: 5px; font-size: 130%"><b>{{ props.item.score }}</b></span>
-                                                            </v-flex>
-                                                            <v-flex sm4 xs5 align-center class="text-xs-right pd-right10">
-                                                                {{ props.item.visitor_team.name }}
-                                                            </v-flex>
-                                                            <v-flex sm1 hidden-xs-only align-center class="text-xs-right" style="width: 50px; padding-right: 15px">
-                                                                <img :src="props.item.visitor_team.image" width="25"/>
-                                                            </v-flex>
-                                                        </v-layout>
-                                                    </v-flex>
-                                                </v-layout>
-                                            </v-flex>
-                                        </v-layout>                             
-                                    </template>
-                                </v-data-table>
-                            </v-card-text>
-                        </v-card>
-                    </v-expansion-panel-content>
-                </v-expansion-panel>
-
-                <!-- ENGLISH PREMIER LEAGUE -->
-                <v-expansion-panel class="elevation-0" :value="1">
-                    <v-expansion-panel-content style="background-color: green">
-                        <div slot="header" class="white--text">
-                            ENGLISH PREMIER LEAGUE
-                        </div>
-                        <v-icon slot="actions" color="white">$vuetify.icons.expand</v-icon>
-                        <v-card>
-                            <v-card-text style="padding: 8px">
-                                <v-data-table :items="eventsByCompetition('english_premier_league_2018_2019')" class="elevation-0" hide-actions hide-headers>
-                                    <template slot="items" slot-scope="props" style="height: 15px; border-spacing: 0; padding: 2px; border: 1px solid black">
-                                        <v-layout align-center style="">
-                                            <v-flex xs12>
-                                                <div style="background-color: black; color: white; padding: 5px"><img src="/images/switzerland.png" style="width: 13px; height: 13px"/> {{ props.item.competition.name }}</div>
-                                            </v-flex>
-                                        </v-layout>
-                                        <v-layout align-center style="padding: 0; border: 1px solid black">
                                             <v-flex xs12 style="margin: 0; padding-top: 2px; padding-bottom: 2px; height: 100%">
                                                 <v-layout align-start>
                                                     <v-flex class="text-xs-left" style="width: 4px; padding-left: 2px; padding-right: 2px; height: 15px; margin: 0">
                                                         <div style="background-color: red; height: 100%; width: 2px"></div>
                                                     </v-flex>
                                                     <v-flex class="text-xs-left" style="width: 100%; padding: 0; height: 15px; margin: 0">
-                                                        <div style="color: orange;font-size: 80%"><span style="float: left; background-color: red; color: white; text-align: center; padding-left: 5px; padding-right: 5px; margin-right: 5px"> {{ props.item.status}}</span> {{ props.item.date }} - {{ props.item.time}}</div>
+                                                        <div style="color: orange;font-size: 80%"><span style="float: left; background-color: red; color: white; text-align: center; padding-left: 5px; padding-right: 5px; margin-right: 5px"> {{ props.item.status}}</span> {{ props.item.date }} - {{ convertToLocalTime(props.item.timestamp) }}</div>
                                                     </v-flex>
                                                 </v-layout>
                                                 <v-layout row align-center>
-                                                    <v-flex class="text-xs-left" style="width: 4px; padding-left: 2px; padding-right: 2px; height: 40px; margin: 0">
-                                                        <div style="background-color: red; height: 40px; width: 2px"></div>
-                                                    </v-flex>
                                                     <v-flex>
                                                         <v-layout align-center style="width: 100%">
                                                             <v-flex sm1 hidden-xs-only align-center class="text-xs-left" style="width: 50px; padding-left: 15px">
-                                                                <img :src="props.item.home_team.image" width="25"/>
+                                                                <img :src="'/images/teams/' + props.item.home_team.slug + '.png'" :lazy-src="'/images/icon.png'" width="25"/>
                                                             </v-flex>
                                                             <v-flex sm4 xs5 align-center class="text-xs-left pd-left10">
                                                                 {{ props.item.home_team.name }} 
                                                             </v-flex>
                                                             <v-flex sm2 xs2 class="text-xs-center">
-                                                                <span style="background-color: black; color: orange; padding: 2px 10px; border-radius: 5px; font-size: 130%"><b>{{ props.item.score }}</b></span>
+                                                                <span style="background-color: black; color: orange; padding: 2px 10px; border-radius: 5px; font-size: 130%">
+                                                                    <span v-if="props.item.score"><b>{{ props.item.score }}</b></span>
+                                                                    <span v-else>-</span>
+                                                                </span>
                                                             </v-flex>
                                                             <v-flex sm4 xs5 align-center class="text-xs-right pd-right10">
                                                                 {{ props.item.visitor_team.name }}
                                                             </v-flex>
                                                             <v-flex sm1 hidden-xs-only align-center class="text-xs-right" style="width: 50px; padding-right: 15px">
-                                                                <img :src="props.item.visitor_team.image" width="25"/>
+                                                                <img :src="'/images/teams/' + props.item.visitor_team.slug + '.png'" :lazy-src="'/images/icon.png'" width="25"/>
                                                             </v-flex>
                                                         </v-layout>
                                                     </v-flex>
                                                 </v-layout>
                                             </v-flex>
-                                        </v-layout>                                 
+                                        </v-layout>								
                                     </template>
                                 </v-data-table>
                             </v-card-text>
@@ -200,6 +156,65 @@
                     </v-expansion-panel-content>
                 </v-expansion-panel>
 
+                <!-- ALL EVENTS -->
+                <v-expansion-panel class="elevation-0" :value="0">
+                    <v-expansion-panel-content class="green">
+                        <div slot="header" class="white--text">
+                            ALL EVENTS
+                        </div>
+                        <v-icon slot="actions" color="white">$vuetify.icons.expand</v-icon>
+                        <v-card>
+                            <v-card-text style="padding: 0 8px 8px 8px">
+                                <v-data-table :items="allEvents" class="elevation-0" hide-actions hide-headers>
+                                    <template slot="items" slot-scope="props" style="height: 15px; border-spacing: 0; padding: 2px; border: 1px solid black">
+                                        <v-layout style="background-color: black;">
+                                            <div style="color: white; padding: 5px; display: flex; align-items:center;" v-for="country in props.item.competition.countries" :key="country.slug">
+                                                <img :src="'/images/countries/' + country.slug + '.png'" style="width: 20px; height: 20px; margin-right: 5px;" />
+                                                {{ props.item.competition.name }}
+                                            </div>
+                                        </v-layout>
+                                        <v-layout align-center style="padding: 0; border-right: 1px solid black; border-left: 1px solid black; border-bottom: 1px solid black">
+                                            <v-flex xs12 style="margin: 0; padding-top: 2px; padding-bottom: 2px; height: 100%">
+                                                <v-layout align-start>
+                                                    <v-flex class="text-xs-left" style="width: 4px; padding-left: 2px; padding-right: 2px; height: 15px; margin: 0">
+                                                        <div style="background-color: red; height: 100%; width: 2px"></div>
+                                                    </v-flex>
+                                                    <v-flex class="text-xs-left" style="width: 100%; padding: 0; height: 15px; margin: 0">
+                                                        <div style="color: orange;font-size: 80%"><span style="float: left; background-color: red; color: white; text-align: center; padding-left: 5px; padding-right: 5px; margin-right: 5px"> {{ props.item.status}}</span> {{ props.item.date }} - {{ convertToLocalTime(props.item.timestamp) }}</div>
+                                                    </v-flex>
+                                                </v-layout>
+                                                <v-layout row align-center>
+                                                    <v-flex>
+                                                        <v-layout align-center style="width: 100%">
+                                                            <v-flex sm1 hidden-xs-only align-center class="text-xs-left" style="width: 50px; padding-left: 15px">
+                                                                <img :src="'/images/teams/' + props.item.home_team.slug + '.png'" :lazy-src="'/images/icon.png'" width="25"/>
+                                                            </v-flex>
+                                                            <v-flex sm4 xs5 align-center class="text-xs-left pd-left10">
+                                                                {{ props.item.home_team.name }} 
+                                                            </v-flex>
+                                                            <v-flex sm2 xs2 class="text-xs-center">
+                                                                <span style="background-color: black; color: orange; padding: 2px 10px; border-radius: 5px; font-size: 130%">
+                                                                    <span v-if="props.item.score"><b>{{ props.item.score }}</b></span>
+                                                                    <span v-else>-</span>
+                                                                </span>
+                                                            </v-flex>
+                                                            <v-flex sm4 xs5 align-center class="text-xs-right pd-right10">
+                                                                {{ props.item.visitor_team.name }}
+                                                            </v-flex>
+                                                            <v-flex sm1 hidden-xs-only align-center class="text-xs-right" style="width: 50px; padding-right: 15px">
+                                                                <img :src="'/images/teams/' + props.item.visitor_team.slug + '.png'" :lazy-src="'/images/icon.png'" width="25"/>
+                                                            </v-flex>
+                                                        </v-layout>
+                                                    </v-flex>
+                                                </v-layout>
+                                            </v-flex>
+                                        </v-layout>									
+                                    </template>
+                                </v-data-table>
+                            </v-card-text>
+                        </v-card>
+                    </v-expansion-panel-content>
+                </v-expansion-panel>
             </v-card-text>
 
         </v-container>          
@@ -243,137 +258,19 @@
             title: 'Events',
         },
         layout: 'layoutFront',
-        created() {
+        async created() {
             setTimeout(() => {
                 this.$store.dispatch("events/loadedEvents")
                 console.log('Done!')           
-			}, 2500)
+            }, 2500)
+            if (this.$store.getters['users/loadedUserTeams'].length < 1) {
+				await this.$store.dispatch('users/loadedUserTeams')
+			}
         },
         data() {
             return {
                 active: "",
-                allEvents: [
-                    {
-                        date: "01-12-2018",
-                        time: "20:30",
-                        home_team: {
-                            name: "FC Basel",
-                            slug: "fc_basel",
-                            image: "https://upload.wikimedia.org/wikipedia/fr/thumb/7/72/Logo_FC_B%C3%A2le.svg/800px-Logo_FC_B%C3%A2le.svg.png"
-                        },
-                        visitor_team: {
-                            name: "Grasshopper Zurich",
-                            slug: "grasshopper_zuerich",
-                            image: "https://upload.wikimedia.org/wikipedia/commons/7/7a/Logo_Signet_mit_Sterne_gelb-blau.png"
-                        },
-                            score: "2 - 2",
-                            status: "FINISHED",
-                            competition: {
-                            name: "Super League",
-                            slug: "swiss_super_league_2018_2019"
-                        }
-                    },
-                    {
-                        date: "01-12-2018",
-                        time: "16:00",
-                        home_team: {
-                            name: "Young Boys",
-                            slug: "young_boys",
-                            image: "https://upload.wikimedia.org/wikipedia/fr/thumb/c/c2/BSC_Young_Boys.svg/396px-BSC_Young_Boys.svg.png"
-                        },
-                        visitor_team: {
-                            name: "Neuchâtel Xamax",
-                            slug: "xamax",
-                            image: "https://upload.wikimedia.org/wikipedia/fr/d/d5/Logo_Neuch%C3%A2tel_Xamax.jpg"
-                        },
-                        score: "0 - 3",
-                        status: "FINISHED",
-                        competition: {
-                            name: "Super League",
-                            slug: "swiss_super_league_2018_2019"
-                        }
-                    },
-                    {
-                        date: "01-12-2018",
-                        time: "16:00",
-                        home_team: {
-                            name: "Lucerne",
-                            slug: "fc_lucerne",
-                            image: "https://upload.wikimedia.org/wikipedia/fr/thumb/7/77/Logo_FC_Lucerne.svg/1024px-Logo_FC_Lucerne.svg.png"
-                        },
-                        visitor_team: {
-                            name: "Thun",
-                            slug: "thun",
-                            image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/FC_Thun_Logo_2011.svg/800px-FC_Thun_Logo_2011.svg.png"
-                        },
-                        score: "2 - 1",
-                        status: "FINISHED",
-                        competition: {
-                            name: "Super League",
-                            slug: "swiss_super_league_2018_2019"
-                        }
-                    },
-                    {
-                        date: "01-12-2018",
-                        time: "16:00",
-                        home_team: {
-                            name: "Manchester United",
-                            slug: "manchester_united",
-                            image: "https://upload.wikimedia.org/wikipedia/fr/b/b9/Logo_Manchester_United.svg"
-                        },
-                        visitor_team: {
-                            name: "Chelsea",
-                            slug: "chelsea",
-                            image: "https://upload.wikimedia.org/wikipedia/fr/5/51/Logo_Chelsea.svg"
-                        },
-                        score: "2 - 2",
-                        status: "FINISHED",
-                        competition: {
-                            name: "Premier League",
-                            slug: "english_premier_league_2018_2019"
-                        }
-                    },
-                    {
-                        date: "01-12-2018",
-                        time: "16:00",
-                        home_team: {
-                            name: "Southampton",
-                            slug: "southampton",
-                            image: "https://upload.wikimedia.org/wikipedia/fr/thumb/5/54/Southampton_FC.svg/800px-Southampton_FC.svg.png"
-                        },
-                        visitor_team: {
-                            name: "Everton",
-                            slug: "everton",
-                            image: "https://upload.wikimedia.org/wikipedia/fr/0/07/Everton_F.C._%282014%E2%80%93%29.png"
-                        },
-                        score: "0 - 1",
-                        status: "FINISHED",
-                        competition: {
-                            name: "Premier League",
-                            slug: "english_premier_league_2018_2019"
-                        }
-                    },
-                    {
-                        date: "01-12-2018",
-                        time: "16:00",
-                        home_team: {
-                            name: "Inter Milan",
-                            slug: "inter_milan",
-                            image: "https://upload.wikimedia.org/wikipedia/commons/8/89/FC_Internazionale_Milano_2014.svg"
-                        },
-                        visitor_team: {
-                            name: "Juventus",
-                            slug: "juventus",
-                            image: "https://upload.wikimedia.org/wikipedia/commons/1/15/Juventus_FC_2017_logo.svg"
-                        },
-                        score: "3 - 2",
-                        status: "FINISHED",
-                        competition: {
-                            name: "Serie A",
-                            slug: "italian_serie_a_2018_2019"
-                        }
-                    }
-                ]
+                competitions: ['swiss_super_league_2018_2019', 'english_premier_league_2018_2019'],
             }
         },
         computed: {
@@ -384,12 +281,53 @@
                 return "activeRight";
                 }
                 return "headerInfo";
+            },
+            userTeams () {
+				return this.$store.getters['users/loadedUserTeams']
+			},
+			userTeamsIds () {
+				const userTeamsIds = []
+				const userTeams = this.$store.getters['users/loadedUserTeams']
+				userTeams.forEach((team) => {
+					userTeamsIds.push(parseInt(team.livescore_api_id))
+				})
+				return userTeamsIds
+			},
+            userEvents () {
+                const today = moment().format('YYYY-MM-DD')
+                const userTeamsIds = this.userTeamsIds
+                console.log('userTeamsIds: ', userTeamsIds)
+				return this.$store.getters['events/loadedEvents']
+					.filter(event => (event.date === today))
+					.filter(event => (userTeamsIds.includes(event.home_team.livescore_api_id) || userTeamsIds.includes(event.visitor_team.livescore_api_id)))
+					.sort((a, b) => a.timestamp - b.timestamp)
+            },
+            allEvents () {
+                // return this.$store.getters['events/loadedEvents']
+                const today = moment().format('YYYY-MM-DD')
+				const userTeamsIds = this.userTeamsIds
+				return this.$store.getters['events/loadedEvents']
+					.filter(event => (event.date === today))
+					.filter(event => (!userTeamsIds.includes(event.home_team.id) && !userTeamsIds.includes(event.visitor_team.id)))
+					// .filter(event => (!userTeamsIds.includes(event.visitor_team.id)))
+					.sort((a, b) => a.timestamp - b.timestamp)
             }
         },
         methods: {
             eventsByCompetition (competition) {
                 return this.allEvents.filter(event => event.competition.slug === competition)
             },
+            convertToLocalTime (timestamp) {
+				const utcDiff = new Date().getTimezoneOffset()
+                console.log('utcDiff: ', utcDiff)
+                // console.log('moment.unix(timestamp): ', moment.unix(timestamp))
+                // return moment.unix(timestamp).format("HH:mm")
+				if (utcDiff > 0) {
+					return moment.unix(timestamp).add(utcDiff, 'minutes').format("HH:mm")
+				} else {
+					return moment.unix(timestamp).subtract(utcDiff, 'minutes').format("HH:mm")
+				}
+			},
             mouseOver(direction) {
                 console.log(direction);
                 if (direction === "left") {

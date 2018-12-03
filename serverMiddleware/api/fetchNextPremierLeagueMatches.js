@@ -127,7 +127,8 @@ module.exports = app.use(async function(req, res, next) {
       competitionsArray.push({
         livescore_api_id: competition.val().livescore_api_id,
         name: competition.val().name,
-        slug: competition.val().slug
+        slug: competition.val().slug,
+        countries: competition.val().countries
       })
     })
 
