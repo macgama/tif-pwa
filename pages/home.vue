@@ -23,13 +23,13 @@
 						<nuxt-link to="/api/send-notifications" target="_blank">Send notifications</nuxt-link><br />
 
 						<v-alert :value="true" type="error" dismissible v-if="are_notifications_allowed === 'no'">
-      						You did not allowed notifications on this site. To receive our notifications, change your browser settings (notifications button usually stamds directly on the left of the address bar)
+      						You did not allow notifications on this site. To receive our notifications, please change your browser settings (notifications button usually stands directly on the left of the address bar)
     					</v-alert>
 
 						<v-btn color="success" @click="enableNotifications" v-if="are_notifications_allowed === 'default'">Enable notifications on this site</v-btn>
 
 						<v-btn color="warning" @click="unsubscribe" v-if="is_subscribed">Unsubscribe from push notifications</v-btn><br /><br />
-						<v-btn color="success" @click="subscribe" v-if="are_notifications_allowed !== 'no' && are_notifications_allowed !== 'default' && !is_subscribed">Subscribe to push notifications</v-btn><br />
+						<v-btn color="success" @click="subscribe" v-if="are_notifications_allowed !== 'no' && are_notifications_allowed !== 'default' && !is_subscribed" :disabled="loading">Subscribe to push notifications</v-btn><br />
 						<v-btn color="default" @click="checkSubscription">Check my subscription status</v-btn><br />
 						<v-btn nuxt color="success" class="elevation-0" @click="addToHomescreen" v-if="showButton">Add to homescreen</v-btn>
 
@@ -94,6 +94,9 @@
 			}
 		},
 		computed: {
+			loading () {
+				return this.$store.getters['loading']
+			},
 			loadedUser() {
 				return this.$store.getters["users/loadedUser"]
 			}
@@ -196,9 +199,14 @@
 						})
 				})
 			},
-			subscribe(team) {
+			async subscribe(team) {
 				console.log("team: ", team)
-				this.configurePushSub()
+				this.$store.commit('setLoading', true)
+				// await this.configurePushSub()
+				const that = this
+				setTimeout(() => {				
+					that.$store.commit('setLoading', false)					        
+            	}, 2500)
 			},
 			unsubscribe() {
 				const that = this

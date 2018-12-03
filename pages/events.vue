@@ -262,10 +262,7 @@
         },
         layout: 'layoutFront',
         async created() {
-            setTimeout(() => {
-                this.$store.dispatch("events/loadedEvents")
-                console.log('Done!')           
-            }, 2500)
+            this.$store.dispatch("events/loadedEvents")
             if (this.$store.getters['users/loadedUserTeams'].length < 1) {
 				await this.$store.dispatch('users/loadedUserTeams')
 			}
@@ -351,7 +348,7 @@
         font: normal 100%/1 "Acme", Helvetica, sans-serif;
     }
     /* ScoreCard */
-    
+
     .card {
         border-radius: 5px;
     }

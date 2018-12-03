@@ -1,6 +1,6 @@
 <template>
 	<v-app id="app">
-		<v-content class="loading-page" v-if="loadingPage">
+		<v-content v-if="loadingPage">
 			<div class="loader"></div>
 		</v-content>
 
@@ -68,23 +68,17 @@
 	/* #app {
 		font: normal 100%/1 "Acme", Helvetica, sans-serif;
 	} */
-	.loading-page {
-	  	width: 0px;
-		height: 0px;
-		position: absolute;
-		top:0;
-		bottom: 0;
-		left: 0;
-		right: 0;
-    	margin: auto;
-	}
-
 	.loader {
-	    border: 16px solid orangered;
+		position: fixed;
+		border: 16px solid orangered;
 	    border-top: 16px solid #fff;
 	    border-radius: 50%;
-	    width: 120px;
+		width: 120px;
 	    height: 120px;
+		top: 50%;
+		left: 50%;
+		margin-top: -60px;
+		margin-left: -60px;
 	    animation: spin .5s linear infinite;
 	}
 	@keyframes spin {
