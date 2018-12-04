@@ -70,8 +70,12 @@ module.exports = {
             handler: "~/serverMiddleware/registerNewUser"
         },
         {
-            path: "/create-subscription",
-            handler: "~/serverMiddleware/createSubscription"
+            path: "/subscriptions/fetch-subscriptions",
+            handler: "~/serverMiddleware/subscriptions/fetchSubscriptions"
+        },
+        {
+            path: "/subscriptions/create-subscription",
+            handler: "~/serverMiddleware/subscriptions/createSubscription"
         },
         {
             path: "/update-user-tokens",
@@ -82,12 +86,8 @@ module.exports = {
             handler: "~/serverMiddleware/moveOldEvents"
         },
         {
-            path: "/api/send-notifications",
-            handler: "~/serverMiddleware/sendNotifications"
-        },
-        {
-            path: "/api/delete-subscription",
-            handler: "~/serverMiddleware/deleteSubscription"
+            path: "/subscriptions/send-notifications",
+            handler: "~/serverMiddleware/subscriptions/sendNotifications"
         },
         {
             path: "/api/fetch-past-premier-league-matches",

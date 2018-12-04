@@ -79,8 +79,9 @@ module.exports = app.use(async function(req, res, next) {
       // console.log("team.home_team.name: ", team.home_team.name);
       // console.log('team.slug: ', team.slug)
 
-      const subscriptions = await admin.database().ref("/subscriptions/" + team.slug).once("value")
-      // console.log("subscriptions: ", subscriptions)
+      // const subscriptions = await admin.database().ref("/subscriptions/" + team.slug).once("value")
+      const subscriptions = await admin.database().ref("/subscriptions").orderByChild('team_slug').equalTo(team.slug).once("value")
+      console.log("subscriptions: ", subscriptions)
       subscriptions.forEach(function(sub) {
         // console.log("sub: ", sub);
         const pushConfig = {
