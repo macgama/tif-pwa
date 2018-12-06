@@ -204,22 +204,22 @@ module.exports = app.use(async function(req, res, next) {
             const id = match.date + "_" + match.home_id + "_vs_" + match.away_id;
 
             if (match.time.length === 8) {
-              updates["/events_new2/" + id + "/timestamp"] = moment(
+              updates["/events/" + id + "/timestamp"] = moment(
                 date_time
               ).format("X");
             }
-            updates["/events_new2/" + id + "/id"] = id;
-            updates["/events_new2/" + id + "/livescore_api_id"] = match.id;
-            updates["/events_new2/" + id + "/date"] = match.date;
-            updates["/events_new2/" + id + "/time"] = match.time.slice(0, 5); //20:00 instead of 20:00:00
-            updates["/events_new2/" + id + "/competition"] = leagueData;
-            // updates["/events_new2/" + id + "/competition_id"] = parseInt(
+            // updates["/events/" + id + "/id"] = id;
+            updates["/events/" + id + "/livescore_api_id"] = match.id;
+            updates["/events/" + id + "/date"] = match.date;
+            updates["/events/" + id + "/time"] = match.time.slice(0, 5); //20:00 instead of 20:00:00
+            updates["/events/" + id + "/competition"] = leagueData;
+            // updates["/events/" + id + "/competition_id"] = parseInt(
               // leagueData.id
             // );
-            updates["/events_new2/" + id + "/location"] = match.location;
-            updates["/events_new2/" + id + "/round"] = roundData;
-            updates["/events_new2/" + id + "/home_team"] = homeTeamData;
-            updates["/events_new2/" + id + "/visitor_team"] = visitorTeamData;
+            updates["/events/" + id + "/location"] = match.location;
+            updates["/events/" + id + "/round"] = roundData;
+            updates["/events/" + id + "/home_team"] = homeTeamData;
+            updates["/events/" + id + "/visitor_team"] = visitorTeamData;
           }
 
           admin

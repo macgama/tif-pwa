@@ -12,8 +12,14 @@ export const state = () => ({
 })
 
 export const mutations = {
+    setEmptyEvents(state) {
+        state.loadedEvents = []
+    },
     setEvents(state, payload) {
         state.loadedEvents = payload
+    },
+    addEvents(state, payload) {
+        state.loadedEvents.push(...payload)
     },
     setCompetitionEvents(state, payload) {
         state.loadedCompetitionEvents = payload
@@ -84,7 +90,63 @@ export const actions = {
             }
         })
     },
+    loadedEventsByDay ({ commit }, payload) {
+        const date = payload
+        console.log('date: ', date)
+        return new Promise((resolve, reject) => {
+            try {
+                firebase
+                    .database()
+                    .ref("/events/")
+                    .orderByChild('date')
+                    .equalTo(date)
+                    .on("value", function(snapshot) {
+                        const eventsArray = []
+                        for (const key in snapshot.val()) {
+                            eventsArray.push({
+                                ...snapshot.val()[key],
+                                id: key
+                            })
+                        }
+                        // commit("addEvents", eventsArray)
+                        commit("setEvents", eventsArray)
+                        resolve(eventsArray)
+                    })
+            } catch (error) {
+                console.log(error)
+                new Noty({
+                    type: "error",
+                    text: "Events not found",
+                    timeout: 5000,
+                    theme: "metroui"
+                }).show()
+                commit("setError", error, { root: true })
+                commit("setLoading", false, { root: true })
+                reject(error)
+            }
+        })
+    },
+    async loadedEventsByDay2 ({ commit }, payload) {
+        try {
+            console.log('loadedDailyEvents action called')
+            const date = payload
+            console.log('date: ', date)
+            // return
 
+            const snapshot = await firebase.database().ref("/events/").orderByChild('date').equalTo(date).on('value', function(){})
+            const eventsArray = []
+            snapshot.forEach((event) => {
+                eventsArray.push({...event.val(), id: event.key})
+            })
+            console.log('eventsArray: ', eventsArray)
+            commit("addEvents", eventsArray)
+            
+            return eventsArray
+        }
+        catch(error) {
+            console.log('error: ', error)
+        }
+    },
     loadedCompetitionEvents({ commit }, payload) {
         // console.log('payload: ', payload)
         const competitionId = parseInt(payload.livescore_api_id)

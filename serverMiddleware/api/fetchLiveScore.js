@@ -59,16 +59,16 @@ module.exports = app.use(async function(req, res, next) {
       if (leaguesArray.includes(match.league_id)) {
         const id = today + "_" + match.home_id + "_vs_" + match.away_id;
 
-        updates["/events_new2/" + id + "/livescore_api_id"] = match.id;
-        updates["/events_new2/" + id + "/score"] = match.score;
-        updates["/events_new2/" + id + "/ht_score"] = match.ht_score;
-        updates["/events_new2/" + id + "/ft_score"] = match.ft_score;
-        updates["/events_new2/" + id + "/et_score"] = match.et_score;
-        updates["/events_new2/" + id + "/time"] = match.time;
-        updates["/events_new2/" + id + "/status"] = match.status;
-        updates["/events_new2/" + id + "/last_changed"] = match.last_changed;
+        updates["/events/" + id + "/livescore_api_id"] = match.id;
+        updates["/events/" + id + "/score"] = match.score;
+        updates["/events/" + id + "/ht_score"] = match.ht_score;
+        updates["/events/" + id + "/ft_score"] = match.ft_score;
+        updates["/events/" + id + "/et_score"] = match.et_score;
+        updates["/events/" + id + "/time"] = match.time;
+        updates["/events/" + id + "/status"] = match.status;
+        updates["/events/" + id + "/last_changed"] = match.last_changed;
         if (match.status !== 'FINISHED') {
-          updates["/events_new2/" + id + "/notification_sent"] = false
+          updates["/events/" + id + "/notification_sent"] = false
         }
       }
     }

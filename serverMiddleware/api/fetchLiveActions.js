@@ -45,11 +45,11 @@ module.exports = app.use(async function (req, res, next) {
 
                 for (let event of events) {
                     // console.log('event: ', event)
-                    updates['/events_new2/' + id + '/events/' + event.id + '/player'] = event.player
-                    updates['/events_new2/' + id + '/events/' + event.id + '/time'] = event.time
-                    updates['/events_new2/' + id + '/events/' + event.id + '/event'] = event.event
-                    updates['/events_new2/' + id + '/events/' + event.id + '/sort'] = event.sort
-                    updates['/events_new2/' + id + '/events/' + event.id + '/home_away'] = event.home_away
+                    updates['/events/' + id + '/events/' + event.id + '/player'] = event.player
+                    updates['/events/' + id + '/events/' + event.id + '/time'] = event.time
+                    updates['/events/' + id + '/events/' + event.id + '/event'] = event.event
+                    updates['/events/' + id + '/events/' + event.id + '/sort'] = event.sort
+                    updates['/events/' + id + '/events/' + event.id + '/home_away'] = event.home_away
                 }
                 console.log('updates: ', updates)
                 admin.database().ref().update(updates).then((snapshot) => {

@@ -42,13 +42,16 @@
                                 <v-flex d-flex xs12>
                                     <v-layout row wrap :class="classObject">
                                         <v-flex d-flex xs6 justify-center align-center class="text-xs-left">
-                                            <div class="" style="font-size: 100%">
+                                            <div class="" style="font-size: 100%" v-if="!loadedUser">
                                             Utilisateur Invité
                                             </div>
                                         </v-flex>
                                         <v-flex d-flex xs6 justify-center align-center class="text-xs-right">
-                                            <div class="" style="font-size: 100%">
-                                                S'incrire - Se connecter
+                                            <div class="" style="font-size: 100%" v-if="!loadedUser">
+                                                <nuxt-link to="/">S'incrire - Se connecter</nuxt-link>
+                                            </div>
+                                            <div v-else>
+                                                Bienvenue, {{ loadedUser.email }}
                                             </div>
                                         </v-flex>
                                     </v-layout>
@@ -76,14 +79,14 @@
                 <v-flex d-flex x1 justify-end align-center style="padding-left: 20px;" @click="eventsByDate('substractOne')">
                     <fa :icon="['fas', 'angle-double-left']" size="1x" class="icon" />
                 </v-flex>
-                <v-flex d-flex x2 justify-start align-center class="text-xs-center navButton" style="height: 40px">
+                <v-flex d-flex x2 justify-start align-center class="text-xs-center navButton" style="height: 40px" @click="eventsByDate('yesterday')">
                     Hier
                 </v-flex>
                 <v-flex d-flex x6 justify-center align-center class="text-xs-center" style="height: 40px">
                     {{ date | moment('dddd, MMMM Do YYYY') }}
                 </v-flex>
-                <v-flex d-flex x2 justify-end align-center class="text-xs-center navButton" style="height: 40px">
-                    Demain
+                <v-flex d-flex x2 justify-end align-center class="text-xs-center navButton" style="height: 40px" @click="eventsByDate('tomorrow')">
+                    Demain {{dayNumber}}
                 </v-flex>
                 <v-flex d-flex x1 justify-end align-center style="padding-right: 20px;" @click="eventsByDate('addOne')">
                     <fa :icon="['fas', 'angle-double-right']" size="1x" class="icon" style="text-shadow: 0 0 15px #3b5998;"/>
@@ -98,7 +101,7 @@
                     <!-- events: {{ events }}<br /><br /> -->
                 </p>
                 <!-- MY EVENTS -->
-                <v-expansion-panel class="elevation-0" :value="0">
+                <v-expansion-panel class="elevation-0" :value="0" v-if="loadedUser">
                     <v-expansion-panel-content class="orange">
                         <div slot="header" class="white--text">
                             MY EVENTS
@@ -195,8 +198,23 @@
                                                             </v-flex>
                                                             <v-flex sm2 xs2 class="text-xs-center">
                                                                 <span style="background-color: black; color: orange; padding: 2px 10px; border-radius: 5px; font-size: 130%">
-                                                                    <span v-if="props.item.score"><b>{{ props.item.score }}</b></span>
-                                                                    <span v-else>-</span>
+                                                                    <!-- <span v-if="props.item.score"><b>{{ props.item.score }}</b></span>
+                                                                    <span v-else>-</span> -->
+
+
+
+
+
+                                                                    <transition name="fade" mode="out-in" :duration="{ enter: 3000, leave: 2000 }">
+                                                                        <span :key="props.item.score" v-if="props.item.status === 'IN PLAY' || props.item.status === 'HALF TIME BREAK' || props.item.status === 'ADDED TIME' || props.item.status === 'FINISHED'">
+                                                                            {{ props.item.score }}
+                                                                        </span>
+                                                                        <span v-else>-</span>
+                                                                    </transition>
+
+
+
+
                                                                 </span>
                                                             </v-flex>
                                                             <v-flex sm4 xs5 align-center class="text-xs-right pd-right10">
@@ -261,7 +279,7 @@
 				{ rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Acme' }
 			]
         },
-        layout: 'layoutFront',
+        layout: 'layoutScoreMode',
         async created() {
             const today = moment().format('YYYY-MM-DD')
    //          console.log('today: ', today)
@@ -292,6 +310,9 @@
                 return "activeRight";
                 }
                 return "headerInfo";
+            },
+            loadedUser () {
+                return this.$store.getters['users/loadedUser']
             },
             userTeams () {
 				return this.$store.getters['users/loadedUserTeams']
@@ -347,18 +368,29 @@
 			},
             async eventsByDate (setDayNumber) {
                 console.log('setDate: ', setDayNumber)
-                if (setDayNumber === 'addOne') {
-                    this.dayNumber += 1
-                } else if (setDayNumber === 'substractOne') {
-                    this.dayNumber -= 1
+                switch(setDayNumber) {
+                    case 'substractOne':
+                        this.dayNumber -= 1
+                        break
+                    case 'yesterday':
+                        this.dayNumber = -1
+                        break
+                    case 'tomorrow': 
+                        this.dayNumber = 1
+                        break
+                    case 'addOne': 
+                        this.dayNumber += 1
+                        break
                 }
 
                 this.date = moment().add(this.dayNumber, 'days')
+                console.log('this.date: ', this.date)
 
                 const events = this.$store.getters['events/loadedEvents'].filter(event => (
                     event.date === this.date.format('YYYY-MM-DD')
                 ))
                 if (events.length < 1) {
+                    console.log('events.length < 1')
                     await this.$store.dispatch('events/loadedEventsByDay', this.date.format('YYYY-MM-DD'))
                 }
                 console.log('events: ', events)
@@ -518,7 +550,8 @@
         font: normal 120%/1 "Acme", Helvetica, sans-serif;
         padding: 2px;
     }
-
+    
+    /* Ajout J-M */
     .navButton:hover {
         cursor: pointer;
         text-shadow : 0 0 6px #FFF, 0 0 6px #FFF;
@@ -526,8 +559,17 @@
     .icon:hover {
         cursor: pointer;
         /*text-shadow: 0 0 26px #FFF, 0 0 26px red;*/
-        text-shadow: 10 10 30px #ff0000;
+        text-shadow: 10 10 30px #ff0000; color: orangered;
         /*text-shadow: 0 0 30px #FFF; color: #FFFFFF;*/
+    }
+
+    /* Vuejs transitions*/
+    .fade-enter-active, .fade-leave-active {
+      transition: opacity 5s;
+      background-color: #000;
+    }
+    .fade-enter, .fade-leave-to {
+      opacity: 0;
     }
 
         @media only screen and (max-width: 768px) {

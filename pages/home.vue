@@ -45,10 +45,6 @@
 						</v-flex>
 						<v-flex sm8 xs12 class="text-xs-center rightBox">
 							<h3>Notifications:</h3>
-							loadedUserSubscriptions: 
-							<div v-for="subscription in loadedUserSubscriptions" :key="subscription.slug">
-								<span>subscription.team</span>
-							</div><br />
 							<nuxt-link to="/subscriptions/send-notifications" target="_blank">Send notifications</nuxt-link><br />
 
 							<v-alert :value="true" type="error" dismissible v-if="are_notifications_allowed === 'no'">
@@ -66,8 +62,8 @@
 					<br /><hr><br />
 					<v-layout row wrap>
 						<v-flex xs12 class="text-xs-center">
-							<v-btn nuxt to="/events" color="primary" class="elevation-0">EVENTS</v-btn>
-							<v-btn nuxt to="/teams" color="primary" class="elevation-0">MY TEAMS</v-btn>
+							<v-btn nuxt to="/teams" color="success" class="elevation-0">MY TEAMS</v-btn>
+							<v-btn nuxt to="/scoremode" color="primary" class="elevation-0">GO TO SCOREMODE</v-btn>
 							<v-btn color="warning" @click="logout" class="elevation-0">Logout</v-btn>
 						</v-flex>
 					</v-layout>

@@ -1,36 +1,32 @@
 <template>
-	<v-app>
+	<v-app style="background-color: #000;">
 		<v-content>
 			<v-container
-			grid-list
-			text-xs-center
-			style="padding: 0; height: 100%; max-width: 800px; border: 1px solid orangered;"
+			  grid-list
+			  text-xs-center
+			  style="background-color: orangered; padding: 0; height: 100%; max-width: 800px;"
 			>
 				<v-layout
-				align-center
-				column
-				justify-center
-				fill-height
-				style="height: 50%; margin: auto"
-				class="text-xs-center"
+				  align-center
+				  column
+				  justify-center
+				  fill-height
+				  style="height: 50%; margin: auto"
+				  class="text-xs-center"
 				>
-				<v-btn round color="black" dark large @click="signInWithGoogle"
-					>Score Mode</v-btn
-				>
-				<p>Petit texte explicatif</p>
+					<v-btn nuxt to="/scoremode" round color="black" dark large>Score Mode</v-btn>
+					<p>Petit texte explicatif</p>
 				</v-layout>
 				<v-layout
-				align-center
-				column
-				justify-center
-				fill-height
-				style="height: 50%; margin: auto; background-color: black; color: orange"
-				class="text-xs-center"
+				  align-center
+				  column
+				  justify-center
+				  fill-height
+				  style="height: 50%; margin: auto; background-color: #fff; color: orange"
+				  class="text-xs-center"
 				>
-				<p style="margin-bottom: 0">Petit texte explicatif</p>
-				<v-btn round large color="deep-orange" dark 
-					>Game Mode</v-btn
-				>
+					<p style="margin-bottom: 0">Petit texte explicatif</p>
+					<v-btn round large color="deep-orange" dark @click="signInWithGoogle">Game Mode</v-btn>
 				</v-layout>
 			</v-container>
 		</v-content>
