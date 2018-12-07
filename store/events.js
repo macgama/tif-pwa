@@ -90,11 +90,29 @@ export const actions = {
             }
         })
     },
-    loadedEventsByDay ({ commit }, payload) {
+    loadedEventsAndCompetitionsByDay ({ commit }, payload) {
         const date = payload
         console.log('date: ', date)
         return new Promise((resolve, reject) => {
             try {
+                // firebase
+                //     .database()
+                //     .ref("/events/")
+                //     .orderByChild('date')
+                //     .equalTo(date)
+                //     .on("value", function(snapshot) {
+                //         const eventsArray = []
+                //         const competitionsArray = []
+                //         for (const key1 in snapshot.val()) {
+                //             eventsArray.push({
+                //                 ...snapshot.val()[key],
+                //                 id: key
+                //             })
+                //         }
+                //         // commit("addEvents", eventsArray)
+                //         commit("setEvents", eventsArray)
+                //         resolve(eventsArray)
+                //     })
                 firebase
                     .database()
                     .ref("/events/")
@@ -102,14 +120,45 @@ export const actions = {
                     .equalTo(date)
                     .on("value", function(snapshot) {
                         const eventsArray = []
-                        for (const key in snapshot.val()) {
-                            eventsArray.push({
-                                ...snapshot.val()[key],
-                                id: key
-                            })
-                        }
-                        // commit("addEvents", eventsArray)
-                        commit("setEvents", eventsArray)
+                        // const competitionsArray = ['english_premier_league_2018_2019', 'swiss_super_league_2018_2019']
+                        const competitionsArray2 = [
+                            {
+                                "name": "La Liga",
+                                "slug": "spanish_la_liga_2018_2019"
+                            },
+                            {
+                                "name": "Premier League",
+                                "slug": "english_premier_league_2018_2019"
+                            },
+                            {
+                                "name": "Serie A",
+                                "slug": "italian_serie_a_2018_2019"
+                            },
+                            {
+                                "name": "Bundesliga",
+                                "slug": "german_bundesliga_2018_2019"
+                            },
+                            {
+                                "name": "Ligue 1",
+                                "slug": "french_ligue1_2018_2019"
+                            },
+                            {
+                                "name": "Super League",
+                                "slug": "swiss_super_league_2018_2019"
+                            }
+                        ]
+                        const competitionsArray = []
+                        snapshot.forEach((event) => {
+                            eventsArray.push({...event.val(), id: event.key})
+                            const competitionSlug = event.val().competition ? event.val().competition.slug : null
+                            if (competitionSlug && !competitionsArray.find(competition => (competition.slug === event.val().competition.slug))) {
+                                competitionsArray.push(event.val().competition)
+                            }
+                        })
+                        console.log('eventsArray: ', eventsArray)
+                        console.log('competitionsArray: ', competitionsArray)
+                        commit('setEvents', eventsArray)
+                        commit('competitions/setCompetitions', competitionsArray, { root: true })
                         resolve(eventsArray)
                     })
             } catch (error) {

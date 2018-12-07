@@ -58,7 +58,7 @@
 
 					<v-expansion-panel class="elevation-0" v-if="selectedCompetition" :value="0">
 						<v-expansion-panel-content class="blue">
-							<div slot="header" class="text-xs-center white--text">CHOISIS UNE OU DES EQUIPES</div>
+							<div slot="header" class="text-xs-center white--text">CHOISIS UNE OU PLUSIEURS EQUIPES</div>
 							<v-icon slot="actions" color="white">$vuetify.icons.expand</v-icon>
 
 							<v-container grid-list-md fluid>

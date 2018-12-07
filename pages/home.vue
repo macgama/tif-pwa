@@ -25,6 +25,7 @@
 								<!-- <span v-for="subscription in loadedUserSubscriptions" :key="subscription.slug">
 									{{ subscription.team }}
 								</span><br /> -->
+								is_subscribed: {{ is_subscribed }}
 							</p>
 							<h4>Une demonstration des techniques de Progressive Web App (PWA) appliquées à TIF:</h4><br />
 							<p>
@@ -57,13 +58,14 @@
 							<v-btn color="success" class="elevation-0" @click="subscribe" v-if="are_notifications_allowed !== 'no' && are_notifications_allowed !== 'default' && !is_subscribed" :disabled="loading">Subscribe to push notifications</v-btn>
 							<br />
 							<v-btn color="default" class="elevation-0" :disabled="checkSubscriptionButtonLoading" @click="checkSubscription">Check my subscription status</v-btn><br />
+							<v-btn color="default" class="elevation-0" v-if="is_subscribed" @click="reloadSubscription">Reload Subscription</v-btn>
 						</v-flex>		
 					</v-layout>
 					<br /><hr><br />
 					<v-layout row wrap>
 						<v-flex xs12 class="text-xs-center">
 							<v-btn nuxt to="/teams" color="success" class="elevation-0">MY TEAMS</v-btn>
-							<v-btn nuxt to="/scoremode" color="primary" class="elevation-0">GO TO SCOREMODE</v-btn>
+							<v-btn nuxt to="/scoremode" color="primary" class="elevation-0">SWITCH TO SCOREMODE</v-btn>
 							<v-btn color="warning" @click="logout" class="elevation-0">Logout</v-btn>
 						</v-flex>
 					</v-layout>
@@ -221,15 +223,25 @@
 
 					let array = []
 					if (displayMessage) {
-						subscriptions.forEach(function (subscription) {
-	    					new Noty({
-								type: "success",
-								text: `You are receiving notifications for ${subscription.team ? subscription.team.name : ''} &#9786;`,
+						if (subscriptions.length > 0) {
+							subscriptions.forEach(function (subscription) {
+		    					new Noty({
+									type: "success",
+									text: `You are receiving notifications for ${subscription.team ? subscription.team.name : ''} &#9786;`,
+									timeout: 5000,
+									theme: "metroui"
+								}).show();
+							});
+						} else {
+							new Noty({
+								type: "warning",
+								text: 'There is a mismatch between your subscription status on the client on the one we have in our database. Please click reload subscriptions button',
 								timeout: 5000,
 								theme: "metroui"
 							}).show();
-						});
+						}
 					}
+					this.is_subscribed = true
 					this.checkSubscriptionButtonLoading = false
 					return true
 				}
@@ -345,6 +357,7 @@
 				console.log("team: ", team)
 				this.$store.commit('setLoading', true)
 				await this.configurePushSub()
+				this.is_subscribed = true
 				this.$store.commit('setLoading', false)
 			},
 			async unsubscribe () {
@@ -365,7 +378,7 @@
 					console.log('snapshot: ', snapshot)
 					this.$store.commit('setLoading', false)
 					snapshot.forEach(team => {
-						console.log('abc')
+						// console.log('abc')
 						new Noty({
 							type: 'success',
 							text: `Successfully deleted subscription to team ${team.name}!`,
@@ -596,6 +609,11 @@
 					.catch(function(error) {
 						console.log('Error: ', error)
 					})
+			},
+			async reloadSubscription () {
+				await this.unsubscribe()
+				await this.subscribe()
+				console.log('DONE!')
 			},
 			goBack() {
 				this.$router.replace("/")

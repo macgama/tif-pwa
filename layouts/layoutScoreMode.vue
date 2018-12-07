@@ -1,6 +1,6 @@
 <template>
-	<v-app id="app">
-		<v-content v-if="loadingPage" style="background-color: #000;">
+	<v-app id="app" style="background-color: #000;">
+		<v-content v-if="loadingPage" style="">
 			<div class="loader"></div>
 		</v-content>
 

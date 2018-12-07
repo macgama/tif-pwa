@@ -8,6 +8,9 @@ export const state = () => ({
 })
 
 export const mutations = {
+    setEmptyCompetitions(state) {
+        state.loadedCompetitions = []
+    },
     setCompetitions(state, payload) {
         state.loadedCompetitions = payload
     },
