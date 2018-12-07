@@ -58,7 +58,7 @@
 							<v-btn color="success" class="elevation-0" @click="subscribe" v-if="are_notifications_allowed !== 'no' && are_notifications_allowed !== 'default' && !is_subscribed" :disabled="loading">Subscribe to push notifications</v-btn>
 							<br />
 							<v-btn color="default" class="elevation-0" :disabled="checkSubscriptionButtonLoading" @click="checkSubscription">Check my subscription status</v-btn><br />
-							<v-btn color="default" class="elevation-0" v-if="is_subscribed" @click="reloadSubscription">Reload Subscription</v-btn>
+							<v-btn color="default" class="elevation-0" v-if="is_subscribed" @click="reloadSubscription">Reload my subscription</v-btn>
 						</v-flex>		
 					</v-layout>
 					<br /><hr><br />

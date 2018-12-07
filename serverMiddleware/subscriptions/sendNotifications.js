@@ -19,7 +19,7 @@ module.exports = app.use(async function(req, res, next) {
     const vapidPrivateKey = process.env.VAPID_PRIVATE_KEY
 
     webpush.setVapidDetails(
-      "mailto:jm.kleger@gmail.com",
+      "mailto:thisisfan2018@gmail.com",
       vapidPublicKey,
       vapidPrivateKey
     );
@@ -27,7 +27,7 @@ module.exports = app.use(async function(req, res, next) {
     // 1) First get all events where notification_sent is false & are finished
     const snapshot = await admin
       .database()
-      .ref("/events_new2/")
+      .ref("/events/")
       // .orderByChild("status")
       .orderByChild('notification_sent')
       // .equalTo("FINISHED")
@@ -57,7 +57,7 @@ module.exports = app.use(async function(req, res, next) {
           });
         }
         const id = childSnapshot.key;
-        updates["/events_new2/" + id + "/notification_sent"] = true;
+        updates["/events/" + id + "/notification_sent"] = true;
       }
     });
     // console.log("teams: ", teams);

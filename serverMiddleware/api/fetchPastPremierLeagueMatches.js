@@ -197,27 +197,27 @@ module.exports = app.use(function(req, res, next) {
               match.date + "_" + match.home_id + "_vs_" + match.away_id;
 
             if (match.time.length === 8) {
-              updates["/events_new2/" + id + "/timestamp"] = moment(
+              updates["/events/" + id + "/timestamp"] = moment(
                 date_time
               ).format("X");
             }
-            updates["/events_new2/" + id + "/id"] = id;
-            updates["/events_new2/" + id + "/livescore_api_id"] = match.id;
-            updates["/events_new2/" + id + "/date"] = match.date;
-            updates["/events_new2/" + id + "/time"] = match.time;
-            updates["/events_new2/" + id + "/competition"] = leagueData;
-            updates["/events_new2/" + id + "/competition_id"] = parseInt(
+            updates["/events/" + id + "/id"] = id;
+            updates["/events/" + id + "/livescore_api_id"] = match.id;
+            updates["/events/" + id + "/date"] = match.date;
+            updates["/events/" + id + "/time"] = match.time;
+            updates["/events/" + id + "/competition"] = leagueData;
+            updates["/events/" + id + "/competition_id"] = parseInt(
               leagueData.id
             );
             // updates["/events_new2/" + id + "/location"] = match.location;
             // updates["/events_new2/" + id + "/round"] = roundData;
-            updates["/events_new2/" + id + "/home_team"] = homeTeamData;
-            updates["/events_new2/" + id + "/visitor_team"] = visitorTeamData;
-            updates["/events_new2/" + id + "/status"] = match.status;
-            updates["/events_new2/" + id + "/score"] = match.score;
-            updates["/events_new2/" + id + "/ht_score"] = match.ht_score;
-            updates["/events_new2/" + id + "/ft_score"] = match.ft_score;
-            updates["/events_new2/" + id + "/et_score"] = match.et_score;
+            updates["/events/" + id + "/home_team"] = homeTeamData;
+            updates["/events/" + id + "/visitor_team"] = visitorTeamData;
+            updates["/events/" + id + "/status"] = match.status;
+            updates["/events/" + id + "/score"] = match.score;
+            updates["/events/" + id + "/ht_score"] = match.ht_score;
+            updates["/events/" + id + "/ft_score"] = match.ft_score;
+            updates["/events/" + id + "/et_score"] = match.et_score;
           }
 
           admin
