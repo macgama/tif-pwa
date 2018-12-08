@@ -129,7 +129,7 @@
                                                             </span>
                                                         </transition>
                                                     </span>
-                                                    <span v-else style="font-size: 1.2em;">{{ props.item.time }}</span>
+                                                    <span v-else style="font-size: 1.2em;">{{ convertToLocaltime(props.item.timestamp) }}</span>
                                                 </td>
                                                 <td class="text-xs-right" width="30%" style="font-size: 1.2em;">{{ props.item.visitor_team.name }}</td>
                                                 <td class="text-xs-right hidden-xs-only" width="10%"><v-img :src="'/images/teams/' + props.item.visitor_team.slug + '.png'" :lazy-src="'/images/icon.png'" aspect-ratio="1" width="30"></v-img></td>
@@ -292,6 +292,16 @@
             }
         },
         methods: {
+            convertToLocaltime (timestamp) {
+                const utcDiff = new Date().getTimezoneOffset()
+                // const utcDiff = '60'
+                console.log('utcDiff: ', utcDiff)
+                if (utcDiff > 0) {
+                    return moment.unix(timestamp).add(utcDiff, 'minutes').format("HH:mm")
+                } else {
+                    return moment.unix(timestamp).subtract(utcDiff, 'minutes').format("HH:mm")
+                }
+            },
             eventsByCompetition (competition) {
                 return this.$store.getters['events/loadedEvents']
                     .filter(event => (event.date === this.date.format('YYYY-MM-DD') && event.competition.slug === competition))

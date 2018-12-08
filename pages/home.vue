@@ -25,8 +25,8 @@
 								<!-- <span v-for="subscription in loadedUserSubscriptions" :key="subscription.slug">
 									{{ subscription.team }}
 								</span><br /> -->
-								are_notifications_allowed: {{ are_notifications_allowed }}<br />
-								is_subscribed: {{ is_subscribed }}
+								<!-- are_notifications_allowed: {{ are_notifications_allowed }}<br /> -->
+								<!-- is_subscribed: {{ is_subscribed }} -->
 							</p>
 							<h4>Une demonstration des techniques de Progressive Web App (PWA) appliquées à TIF:</h4><br />
 							<p>
