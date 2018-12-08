@@ -25,6 +25,7 @@
 								<!-- <span v-for="subscription in loadedUserSubscriptions" :key="subscription.slug">
 									{{ subscription.team }}
 								</span><br /> -->
+								are_notifications_allowed: {{ are_notifications_allowed }}<br />
 								is_subscribed: {{ is_subscribed }}
 							</p>
 							<h4>Une demonstration des techniques de Progressive Web App (PWA) appliquées à TIF:</h4><br />
@@ -353,12 +354,10 @@
 						})
 				})
 			},
-			async subscribe(team) {
-				console.log("team: ", team)
-				this.$store.commit('setLoading', true)
+			async subscribe() {
 				await this.configurePushSub()
-				this.is_subscribed = true
-				this.$store.commit('setLoading', false)
+				// this.is_subscribed = true
+				// this.$store.commit('setLoading', false)
 			},
 			async unsubscribe () {
 				try {
@@ -445,14 +444,27 @@
 					if (!"serviceWorker in navigator") {
 						return
 					}
+					this.$store.commit('setLoading', true)
 					// Get user teams
 					let userTeams = []
 					let loadedUserTeams = this.$store.getters['users/loadedUserTeams']
 					// let loadedUserTeams = []
 
-					if (!loadedUserTeams.length > 0) {
+					if (loadedUserTeams.length < 1) {
 						loadedUserTeams = await this.$store.dispatch('users/loadedUserTeams')
+						if (loadedUserTeams.length < 1) {
+							new Noty({
+								type: "warning",
+								text: `You are not following any team, please select at least one team under "My Teams"`,
+								timeout: 5000,
+								theme: "metroui"
+							}).show();
+							this.$store.commit('setLoading', false)
+							return
+						}
+						
 					}
+
 					loadedUserTeams.forEach((team) => {
 						userTeams.push({name: team.name, slug: team.slug})
 					})
@@ -494,6 +506,8 @@
 								theme: "metroui"
 							}).show();
 						})
+						this.is_subscribed = true
+						this.$store.commit('setLoading', false)
 						return response
 
 						// const response2 = await this.$store.dispatch('subscriptions/createSubscription', {
@@ -506,6 +520,7 @@
 					} else {
 						// We have a subscription
 						// throw 'Already subscribed'
+						this.$store.commit('setLoading', false)
 						this.unsubscribe()
 					}
 
