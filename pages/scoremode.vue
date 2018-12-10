@@ -115,11 +115,11 @@
                                     </div>
                                 </div>
                                 <v-icon slot="actions" color="white">$vuetify.icons.expand</v-icon>
-                                <v-card>
+                                <v-card class="hidden-xs-only">
                                     <v-card-text style="padding: 0px">
                                         <v-data-table :items="eventsByCompetition(competition.slug)" class="elevation-0" hide-actions hide-headers>
                                             <template slot="items" slot-scope="props">
-                                                <td class="text-xs-left hidden-xs-only" width="10%"><v-img :src="'/images/teams/' + props.item.home_team.slug + '.png'" :lazy-src="'/images/icon.png'" aspect-ratio="1" width="30"></v-img></td>
+                                                <td class="text-xs-left" width="10%"><v-img :src="'/images/teams/' + props.item.home_team.slug + '.png'" :lazy-src="'/images/icon.png'" aspect-ratio="1" width="30"></v-img></td>
                                                 <td class="text-xs-left" width="30%" style="font-size: 1.2em;">{{ props.item.home_team.name }}</td>
                                                 <td class="text-xs-center" width="20%">
                                                     <span style="background-color: black; color: orange; padding: 2px 10px; border-radius: 5px; font-size: 130%" v-if="props.item.status === 'IN PLAY' || props.item.status === 'HALF TIME BREAK' || props.item.status === 'ADDED TIME' || props.item.status === 'FINISHED'">
@@ -132,7 +132,27 @@
                                                     <span v-else style="font-size: 1.2em;">{{ convertToLocaltime(props.item.timestamp) }}</span>
                                                 </td>
                                                 <td class="text-xs-right" width="30%" style="font-size: 1.2em;">{{ props.item.visitor_team.name }}</td>
-                                                <td class="text-xs-right hidden-xs-only" width="10%"><v-img :src="'/images/teams/' + props.item.visitor_team.slug + '.png'" :lazy-src="'/images/icon.png'" aspect-ratio="1" width="30"></v-img></td>
+                                                <td class="text-xs-right" width="10%"><v-img :src="'/images/teams/' + props.item.visitor_team.slug + '.png'" :lazy-src="'/images/icon.png'" aspect-ratio="1" width="30"></v-img></td>
+                                            </template>
+                                        </v-data-table>
+                                    </v-card-text>
+                                </v-card>
+                                <v-card class="hidden-sm hidden-md hidden-lg>
+                                    <v-card-text style="padding: 0px">
+                                        <v-data-table :items="eventsByCompetition(competition.slug)" class="elevation-0" hide-actions hide-headers>
+                                            <template slot="items" slot-scope="props">
+                                                <td class="text-xs-left" width="40%" style="font-size: 1em;">{{ props.item.home_team.name }}</td>
+                                                <td class="text-xs-center" width="20%">
+                                                    <span style="background-color: black; color: orange; padding: 2px 10px; border-radius: 5px; font-size: 100%" v-if="props.item.status === 'IN PLAY' || props.item.status === 'HALF TIME BREAK' || props.item.status === 'ADDED TIME' || props.item.status === 'FINISHED'">
+                                                        <transition name="fade" mode="out-in" :duration="{ enter: 3000, leave: 2000 }">
+                                                            <span :key="props.item.score">
+                                                                {{ props.item.score }}
+                                                            </span>
+                                                        </transition>
+                                                    </span>
+                                                    <span v-else style="background-color: black; color: orange; padding: 2px 10px; border-radius: 5px; font-size: 100%">{{ convertToLocaltime(props.item.timestamp) }}</span>
+                                                </td>
+                                                <td class="text-xs-right" width="40%" style="font-size: 1em;">{{ props.item.visitor_team.name }}</td>
                                             </template>
                                         </v-data-table>
                                     </v-card-text>
